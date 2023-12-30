@@ -1,0 +1,2 @@
+## [Available AWS-managed prefix lists](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-aws-managed-prefix-lists.html#available-aws-managed-prefix-lists)
+- AWS managed prefix list를 지원하는 서비스는 위 링크를 참고한다.

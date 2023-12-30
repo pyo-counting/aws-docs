@@ -1,0 +1,1 @@
+ subnet CIDR reservation을 사용하면 aws가 network interface에 할당할 수 없도록 특정 대역을 설정할 수 있다.

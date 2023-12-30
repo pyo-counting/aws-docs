@@ -1,0 +1,1 @@
+managed prefix list를 사용해 security group과 route table을 쉽게 관리할 수 있다. customer managed prefix list, aws managed prefix list가 있다.
