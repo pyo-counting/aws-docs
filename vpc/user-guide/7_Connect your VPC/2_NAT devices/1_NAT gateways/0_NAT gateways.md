@@ -13,4 +13,4 @@ NAT gateway의 특성은 다음과 같다.
 - NAT gateway에 security group을 사용할 수 없다.
 - network ACL를 사용해 NAT gateway의 inbound / outbound 트래픽을 제어할 수 있다. NAT gateway는 1024 - 65535 포트를 사용한다.
 - You can't route traffic to a NAT gateway through a VPC peering connection, a Site-to-Site VPN connection, or AWS Direct Connect. A NAT gateway cannot be used by resources on the other side of these connections.
-- secondary private / public ipv4 주솔르 할당할 수 있다.
+- secondary private / public ipv4 주소를 할당할 수 있다.

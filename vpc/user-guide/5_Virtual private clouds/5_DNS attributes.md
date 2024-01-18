@@ -16,7 +16,7 @@ AWS instance는 항상 private ipv4 주소, private ipv4 주소와 관련된 DNS
 
 AWS 제공 DNS 서버를 활성화하면 DNS hostname이 할당되고 아래 규칙을 통해 resolve된다.
 
-- Private IP DNS name (ipv4 only): 동일한 vpc의 인스턴스 간 통신에 전용 ip DNS 이름(ipv4 전용) hostname을 사용할 수 있다. 인스턴스가 동일한 AWS region에 있고 다른 인스턴스의 hostname이 RFC 1918에 정의된 범위(10.0.0 - 10.255.255(10/8), 172.16.0 - 172.31.255.255(172.16/12) 및 192.168.0 - 192.168.255(192.16/16)에 있는 한 다른 vpc의 다른 인스턴스의 전용 ip DNS 이름(ipv4 전용) hostname을 확인할 수 있다.
+- Private IP DNS name (ipv4 only): 동일한 vpc의 인스턴스 간 통신에 전용 ip DNS 이름(ipv4 전용) hostname을 사용할 수 있다. 인스턴스가 동일한 AWS region에 있고 다른 인스턴스의 hostname이 RFC 1918에 정의된 범위(10.0.0 - 10.255.255(10/8), 172.16.0 - 172.31.255.255(172.16/12) 및 192.168.0 - 192.168.255(192.16/16)에 있다면 다른 vpc의 인스턴스의 ip DNS 이름(ipv4 전용) hostname을 확인할 수 있다.
 - Private resource DNS name: 
 - Public IPv4 DNS: public ipv4 DNS hostname은 `ec2-${public-ipv4-address}.${region}.compute.amazonaws.com` 형식을 갖는다. Amazon DNS server는 인스턴스의 외부 네트워크에서는 public ip로 인스턴스의 내부 네트워크에서는 private ip로 resolve한다.
 
