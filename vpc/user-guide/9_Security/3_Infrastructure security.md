@@ -1,4 +1,4 @@
-## [ompare security groups and network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html#VPC_Security_Comparison)
+## [Compare security groups and network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html#VPC_Security_Comparison)
 
 | Security group                          | Network ACL                             |
 |-----------------------------------------|-----------------------------------------|

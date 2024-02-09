@@ -1,9 +1,9 @@
 ## [Using an asterisk (*) in the names of hosted zones and records](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-asterisk)
+hosted zone, record 이름에 * 문자를 포함할 수 있다.
 
 - Hosted zones
     - domain 가장 왼쪽 label에 *를 포함할 수 없다. 예를 들어 *.example.com는 허용되지 않는다.
     - 다른 위치에 *를 포함하면 DNS는 와일드카드가 아닌 ASCII 문자로 인식한다.
-
 - Records: *의 위치에 따라 와일드카드 또는 ASCII 문자로 인식한다.
     - \*는 가장 왼쪽 label에 위치해야 하며 다른 문자와 같이 사용하면 안된다. 예를 들어 prod.*.example.com는 DNS가 와일드카드가 아닌 ASCII 문자로 인식한다. 그리고 *prod.example.com 와 같이 사용할 수 없다.
     - 명시된 도메인이 우선순위를 갖는다. 예를 들어 *.example.com, acme.example.com가 있을 때 acme.example.com에 대한 DNS 쿼리는 acme.example.com record의 값을 응답한다.
