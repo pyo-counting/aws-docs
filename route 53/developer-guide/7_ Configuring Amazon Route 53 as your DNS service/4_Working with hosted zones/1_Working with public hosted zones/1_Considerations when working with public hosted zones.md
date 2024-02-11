@@ -1,0 +1,4 @@
+public hosted zone 관련해서 아래 고려 사항이 있다.
+- NS, SOA reocrd: hosted zone 생성 시, route 53은 zone을 위한 NS, SOA record를 자동 생성한다. NS record는 DNS 쿼리가 route 53으로 라우팅 되도록 직접 관리하는 name server 또는 registrar에 제공하는 4개의 name server다.
+- 동일한 이름을 갖는 hosted zone: 동일한 이름을 갖는 hosted zone을 생성하고 각기 다른 reocrd를 관리할 수 있다. route 53은 각 hosted zone 별로 각기 다른 4개의 name server를 할당하기 때문에 registrar의 name server record를 업데이트할 때 올바른 hosted zone의 name server 정보를 확인해야한다. route 53은 hosted zone의 이름이 같다고해서 해당 hosted zone의 record 정보를 반환하지 않는다.
+- Reusable delegation sets: 기본적으로 route 53은 각 hosted zone 마다 4개의 name server(delegation set)을 할당한다. 만약 여러 hosted zone을 관리하는 경우 reusable delegation set을 생성할 수 있다(이는 route 53 콘솔에서는 이용이 불가하며 API를 사용해야 한다). 그리고 각 hosted zone 마다 reusable delegation set을 사용할 수 있다. reusable delegation set은 외부 DNS 서비스를 route 53으로 마이그레이션하는 것을 용이하게 해준다.

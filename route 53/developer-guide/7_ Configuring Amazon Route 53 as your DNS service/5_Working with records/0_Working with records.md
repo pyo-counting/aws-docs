@@ -1,0 +1,1 @@
+hosted zone에 속한 record는 hosted zone의 이름으로 끝나야한다. 예를 들어 exampe.com hosted zone에 대해 www.example.com, accounting.tokyo.example.com record를 포함할 수 있지만 www.example.ca subdomain와 같은 record는 포함할 수 없다.

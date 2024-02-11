@@ -8,14 +8,15 @@
 - `DNS resolver`: DNS resolver는 일반적으로 ISP에서 관리하며 사용자와 DNS name server의 중개자 역할을 수행한다. DNS resolver는 ip 주소와 같은 응답을 받기 위해 재귀적으로 authoritative DNS name server에 요청을 보내기 때문에 recursive name server라고도 한다.
 - `hosted zone`: 도메인, 서브-도메인에 대한 트래픽을 라우팅 정보를 포함하는 container. hosted zone의 이름은 도메인 이름과 동일하다.
 - `reusable delegation set`: 여러 hosted zone에서 사용할 수 있는 4개의 authoritative name server 집합. 기본적으로 route 53은 새로운 hosted zone마다 임의의 authoritative name server을 할당한다. 많은 수의 도메인에 대해 DNS route 53으로 마이그레이션을 쉽게하기 위해서 reusable delegation set을 생성한 후 hosted zone에 연결할 수 있다(이미 존재하는 hosted zone에 대해서는 불가).
-- `routing policy`: record에 대한 설정으로 route 53이 DNS 쿼리에 대한 응답을 하느 방법에 대해 설정한다. 아래 옵션을 지원한다.
-    - `Simple routing policy`: 도메인에 대해 지정된 기능을 수행하는 단일 리소스에 인터넷 트래픽을 라우팅하는 데 사용
-    - `Failover routing policy`: active-passive failover를 위해 사용한다.
-    - `Geolocation routing policy`: 사용자 위치에 따라 인터넷 트래픽을 다른 리소스로 라우팅한다.
+- `routing policy`: record에 대한 설정으로 route 53이 DNS 쿼리에 대한 응답을 하는 방법에 대해 설정한다. 아래 옵션을 지원한다.
+    - `Simple routing policy`: 사용자가 지정한 resource로 트래픽을 라우팅한다. 동일한 타입, 이름을 갖는 record를 여러개 만들 수 없다. 대신 동일 record에 여러 값을 명시할 수 있다(alias reocrd는 1개의 AWS resource만 명시할 수 있다). 이 때 route 53은 랜덤 순서로 resolver에게 응답을 한다. 그리고 이러한 값은 health check가 되지 않은 값이며 단지 사용자가 명시한 값일 뿐이다.
+    - `Failover routing policy`: active-passive failover를 위해 사용한다. health check를 통해 healthy한 resource로 트래픽을 라우팅한다.
+    - `Geolocation routing policy`: 사용자 위치에 따라 인터넷 트래픽을 다른 리소스로 라우팅한다. 예를 들어 유럽에서 발생한 DNS 쿼리는 Frankfurt region의 ELB로 트래픽을 라우팅할 수 있다.
     - `Geoproximity routing policy:` 리소스의 위치를 기준으로 트래픽을 라우팅하고 선택적으로 한 위치에 있는 리소스에서 다른 위치에 있는 리소스로 트래픽을 이동하려는 경우에 사용
     - `Latency routing policy`: 여러 위치에 리소스를 운영하고 가장 짧은 지연을 제공할 수 있는 리소스로 트래픽을 라우팅한다.
     - `IP-based routing policy`: 사용자 위치를 기준으로 트래픽을 라우팅하고 트래픽이 발생하는 IP 주소를 가질 때 사용한다.
-    - `Multivalue answer routing policy`: Route 53에서 임의로 최대 8개의 정상 record를 선택하여 DNS 쿼리에 응답할 때 사용
+    - `Multivalue answer routing policy`: Route 53에서 임의로 최대 8개의 정상 record를 선택하여 DNS 쿼리에 응답한다. route 53이 각 resource에 대해 health check를 수행하고 healthy한 resoures의 집합(최대 8개)에 대해서만 응답한다.
+    - `Weighted routing policy`: 사용자가 할당한 비중으로 트래픽을 라우팅한다.
 - `time to live (TTL)`: DNS resolver가 해당 record의 값을 캐시할 시간을 설정. TTL이 만료되기 전에 DNS resolver가 동일한 도메인에 대한 쿼리를 요청 받으면 캐시된 값을 응답한다.
 
     TTL이 클수록 route 53에 대한 쿼리가 적어지기 때문에 요금이 절약된다. 하지만 반대로 레코드의 값의 변경에 따른 전파가 느려진다는 단점도 있다.
