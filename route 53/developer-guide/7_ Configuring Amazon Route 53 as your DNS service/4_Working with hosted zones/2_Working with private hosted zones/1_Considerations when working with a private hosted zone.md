@@ -17,7 +17,7 @@ private hosted zone은 아래 routing policy를 사용할 수 있다.
 - Geolocation routing
 
 **Split-view DNS**  
-route 53을 사용해 split-view DNS(또는 split-horizon DNS)을 구성할 수 있다.
+route 53을 사용해 split-view DNS(또는 split-horizon DNS)을 구성할 수 있다. split-view DNS를 사용하면 동일 도메인 이름에 대해 내부 / 외부 사용을 할 수 있다. 
 1. 동일한 이름을 갖는 public, private hosted zone을 생성한다. 
 2. private hosted zone에 대해 VPC를 연결한다. 해당 VPC의 route 53 resolver는 private hosted zone을 사용한다.
 3. 각 hosted zone에 record를 생성한다.

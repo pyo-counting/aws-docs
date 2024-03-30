@@ -1,4 +1,6 @@
-**NOTE**
+resolver는 on-premise와의 DNS 쿼리를 위한 endpoint를 제공할 수 있다.
+
+> **NOTE**  
 > on-premise 환경에서 직접 vpc +2 주소를 사용해 DNS 쿼리를 수행하는 것은 지원하지 않는 기능이다.
 
 vpc처럼 resolver도 regional하다.

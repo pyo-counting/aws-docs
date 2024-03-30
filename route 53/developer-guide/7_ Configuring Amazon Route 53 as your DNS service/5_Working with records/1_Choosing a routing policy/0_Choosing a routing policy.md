@@ -1,0 +1,1 @@
+record를 생성할 때 route 53이 쿼리 응답을 하는데 사용할 routing policy를 선택할 수 있다.

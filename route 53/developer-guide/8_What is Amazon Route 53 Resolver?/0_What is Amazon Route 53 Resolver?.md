@@ -1,9 +1,12 @@
-route 53 resolver는 기본적으로 모든 VPC에서 사용가능하며 public record, VPC 관련 DNS 이름, private hosted zone에 대한 쿼리를 지원한다.
+route 53 resolver는 public record, aws vpc 고유 DNS 이름, aws route 53 private hosted zone에 대한 재귀적 DNS 쿼리를 수행하며 기본적으로 모든 vpc에서 사용할 수 있다.
 
-VPC는 VPC CIDR + 2 주소를 사용해 route 53 연결한다. 이는 az 내의 route 53 resolver에 연결되는 주소다.
+> **Note**  
+> route 53 resolver는 이전에 Amazon DNS server로 불렸으나, resolver rule, inbound & outbound endpoint가 추가되면서 이름이 바뀌었다.
+
+vpc는 vpc cidr + 2 주소를 사용해 route 53 resolver에 연결한다. 이는 az 내의 route 53 resolver에 연결되는 주소다.
 
 route 53 resolver는 아래 DNS 쿼리에 대해 응답한다.
-- EC2 인스턴스에 대한 local vpc 도메인 이름
+- ec22 인스턴스에 대한 local vpc 도메인 이름
 - private hosted zone의 record
 - public 도메인. route 53 resolver는 이를 위해 internet을 사용해 public record에 대해 recursive lookup을 수행한다.
 

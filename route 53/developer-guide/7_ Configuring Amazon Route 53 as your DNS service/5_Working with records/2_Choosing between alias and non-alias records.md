@@ -26,7 +26,7 @@ alias record는 CNAME record와 유사하지만 몇 가지 다른 점이 존재�
     - CNAME record: hosted zone 이름과 동일한 이름을 갖는 CNAME record를 만들 수 없다.
 - Pricing for DNS queries
     - alias record: AWS resource에 대한 alias 쿼리는 비용이 들지 않는다.
-    - CNAME record: 
+    - CNAME record: 비용이 든다.
 - Record type specified in the DNS query
     - alias record: alias record의 이름과 타입이 DNS 쿼리 요청과 일치하는 경우에만 응답한다.
     - CNAME record: DNS 쿼리 요청에 명시된 record 타입과 관계 없이 리다이렉트한다.
