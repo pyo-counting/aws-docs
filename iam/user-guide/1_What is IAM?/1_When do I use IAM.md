@@ -1,5 +1,5 @@
 ## When you are authorized to access AWS resources
-authentication은 identity credential을 사용해 aws에 로그인하는 방법이다. aws account root user, iam user, iam role을 assume해 aws에 로그인(authentication)해야 한다.
+authentication은 identity credential을 사용해 aws에 로그인하는 방법이다. aws account root user, iam user, iam role assume과 같은 방법을 사용해 aws에 로그인(authentication)해야 한다.
 
 identity source를 통해 제공되는 credential을 사용해 aws에 federated identity로 로그인할 수 있다. aws iam identity center user, 회사의 single sign-on authentication, google 또는 facebook credential 등이 있다. federated identity로 로그인 하기 위해서 관리자는 먼저 iam role을 사용해 identity federation을 설정해야 한다. federation을 사용해 aws에 접근하는 것은 간접적으로 role을 assume하는 것이다.
 
