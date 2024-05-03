@@ -14,4 +14,4 @@ If you plan to configure a stateful network appliance in your VPC, you can enabl
 ## Routing
 vpc의 subnet route table과 transit gateway의 route table에 대해 잘 이해해야 한다. subnet route table에서는 target으로 transit gateway로의 route를 설정할 수 있다. 트래픽은 transit gateway attachment의 network interface를 통해 transit gateway로 전송된다. 그 다음 transit gateway에서는 해당 transit gateway attachement의 transit gateway route table을 확인해 다음 hop(transit gateway attachment)을 결정한다.
 
-transit gateway route table은 target으로 transit gateway attachament로의 route만 설정할 수 있다. transit gateway route table을 통해 transit gateway attachment로 라우팅이 이루어진다. transit gateway attachment는 실제 특정 az 내 subnet의 network interface이기 때문에 해당 subnet route table을 이용한다.
+transit gateway route table은 target으로 transit gateway attachament로의 route만 설정할 수 있다. transit gateway route table을 통해 transit gateway attachment로 라우팅이 이루어진다. transit gateway attachment는 실제 특정 az 내 subnet의 network interface이기 때문에 해당 network interface는 subnet route table을 이용한다.
