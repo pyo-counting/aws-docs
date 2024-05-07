@@ -22,7 +22,6 @@ transit gateway route table에 blackhole route를 생성할 수 있다.
 transit gateway에 vpc를 attach할 때 vpc에서 transit gateway로 route할 수 있도록 subnet route table에 transit gateway로의 route를 추가해야한다.
 
 ### Route propagation
-
 vpc attachment의 경우 vpc의 cidr가 transit gateway route table에 propagation된다.
 
 When dynamic routing is used with a VPN attachment or a Direct Connect gateway attachment, you can propagate the routes learned from the on-premises router through BGP to any of the transit gateway route tables.
@@ -33,7 +32,7 @@ For a Connect attachment, routes in the route table associated with the Connect 
 
 For a Direct Connect gateway attachment, allowed prefixes interactions control which routes are advertised to the customer network from AWS.
 
-statie route, propagated route가 동일 목적지를 갖는 경우 static route가 우선 순위를 갖기 때문에 propagated route는 route table에 포함되지 않는다.
+static route, propagated route가 동일 목적지를 갖는 경우 static route가 우선 순위를 갖기 때문에 propagated route는 route table에 포함되지 않는다.
 
 ### Routes for peering attachments
 

@@ -1,0 +1,1 @@
+transit gateway dynamic routing은 aws cloud wan의 네트워크 트래픽을 라우팅하기 위해 policy table을 사용한다.
