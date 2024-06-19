@@ -26,7 +26,7 @@ route 53을 사용해 split-view DNS(또는 split-horizon DNS)을 구성할 수 
 부분적으로 중복되는 private, public hosted zone이 있을 경우 resolver는 더 정확한 매칭을 사용한다.
 1. resolver는 dns 쿼리에 매칭되는 private hosted zone이 있는지 확인한다. 확인 시 매칭 방법은 다음과 같다.
     - DNS 쿼리 요청 값과 동일한 이름을 갖는 private hosted zone
-    - DNS 쿼리 요청 값과 더 정확항 매칭이 있는 private hosted zone
+    - DNS 쿼리 요청 값과 더 정확항 매칭이 있는 private hosted zone  
     만약 매칭되는 private hosted zone이 없을 경우 resolver는 쿼리를 public DNS resolver로 포워딩하게되며 이는 일반적인 DNS 쿼리와 동일하게 처리된다.
 2. private hosted zone에 매칭되는 경우 해당 private hosted zone 내에서 record를 찾아 값을 반환한다.   
     **NOTE**
@@ -42,6 +42,7 @@ route 53을 사용해 split-view DNS(또는 split-horizon DNS)을 구성할 수 
 > If you have a private hosted zone (example.com) and a Route 53 Resolver rule that routes traffic to your network for the same domain name, the Resolver rule takes precedence.
 
 **Private hosted zones and Route 53 Resolver rules**  
+private hosted zone과 Resolver rule이 있는 경우 Resolver rule이 우선순위를 갖는다.
 
 **Delegating responsibility for a subdomain**  
 private hosted zone에서는 subdomain에 대한 책임을 위임하기 위해 NS 레코드를 생성할 수 없다.

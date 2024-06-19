@@ -6,4 +6,4 @@ private hosted zone 생성 시 아래 name server가 사용된다.
 
 위 name server는 예약되었으며 route 53 public hosted zone에 사용되지 않는다.
 
-인터넷에서 위 name server를 확인할 수 있지만 route 53 resolver는 name server 주소에 연결하지 않는다. 그리고 쿼리를 수행하더라도 private hosted zone의 정보가 반환되지 않는다. 
+인터넷에서 위 name server를 확인할 수 있지만 route 53 resolver는 name server 주소에 연결하지 않는다. 그리고 쿼리를 수행하더라도 private hosted zone의 정보가 반환되지 않는다. vpc 밖에서 Route 53 resolver에 쿼리하기 위해서는 해당 hosted zone이 연결된 vpc 상에 resolver inbound endpoint를 통해서만 가능하다.
