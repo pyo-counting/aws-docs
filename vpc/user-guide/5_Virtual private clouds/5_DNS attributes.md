@@ -23,7 +23,7 @@ AWS 제공 DNS 서버를 활성화하면 DNS hostname이 할당되고 아래 규
 ## [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support)
 - DNS options:
     - Enable DNS hostnames: ec2 인스턴스가 public ip에 대해 public DNS hostname을 할당받을지 여부
-    - Enable DNS resolution: vpc 내에서 route 53 resolver(또는 DNS server)을 통한 private DNS hostname에 대한 resolution을 사용할지 여부
+    - Enable DNS resolution: vpc 내에서 route 53 resolver(또는 DNS server)을 통한 DNS resolution을 사용할지 여부
 
 두 옵션 중 하나라도 false라면 아래 경우가 발생한다.
 - public ip가 있는 인스턴스에 대해 public DNS hostname을 할당 받지 못한다.
