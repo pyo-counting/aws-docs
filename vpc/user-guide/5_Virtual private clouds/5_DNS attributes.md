@@ -25,10 +25,13 @@ AWS 제공 DNS 서버를 활성화하면 DNS hostname이 할당되고 아래 규
     - Enable DNS hostnames: ec2 인스턴스가 public ip에 대해 public DNS hostname을 할당받을지 여부
     - Enable DNS resolution: vpc 내에서 route 53 resolver(또는 DNS server)을 통한 DNS resolution을 사용할지 여부
 
-두 옵션 중 하나라도 false라면 아래 경우가 발생한다.
-- public ip가 있는 인스턴스에 대해 public DNS hostname을 할당 받지 못한다.
-- Amazon Route 53 Resolver는 Amazon-provided private DNS hostname을 resolve하지 못한다.
-- Instances receive custom private DNS hostnames if there is a custom domain name in the DHCP options set. If you are not using the Amazon Route 53 Resolver server, your custom domain name servers must resolve the hostname as appropriate.
+- 두 옵션이 모두 true라면 아래 경우가 발생한다.
+    - public IP 주소가 있는 인스턴스는 public DNS hostname을 할당받는다.
+    - Amazon Route 53 Resolver 서버는 Amazon-provided private DNS hostname을 resolve할 수 있다.
+- 두 옵션 중 하나라도 false라면 아래 경우가 발생한다.
+    - public ip가 있는 인스턴스에 대해 public DNS hostname을 할당 받지 못한다.
+    - Amazon Route 53 Resolver는 Amazon-provided private DNS hostname을 resolve하지 못한다.
+    - Instances receive custom private DNS hostnames if there is a custom domain name in the DHCP options set. If you are not using the Amazon Route 53 Resolver server, your custom domain name servers must resolve the hostname as appropriate.
 
 ## [Private hosted zones](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-private-hosted-zones)
 route 53의 private hosted zone을 사용해 사용자 정의 DNS 도메인을 사용할 경우 enableDnsHostnames, enableDnsSupport 설정을 모두 활성화해야 한다.
