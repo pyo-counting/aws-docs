@@ -15,6 +15,30 @@ vpc의 subnet route table과 transit gateway의 route table에 대해 잘 이해
 
 transit gateway route table은 target으로 transit gateway attachament로의 route만 설정할 수 있다. transit gateway route table을 통해 transit gateway attachment로 라우팅이 이루어진다. transit gateway attachment로의 라우팅은 실제 network interface로의 라우팅이다. network interface는 다음 hop을 결정하기 위해 subnet route table을 이용한다.
 
+spoke-1 vpc와 spoke-2 vpc의 tgw를 이용한 트래픽 전송/응답의 흐름은 다음과 같다.
+1. spoke-1 vpc / svr sbn: instance-1 eni가 svr sbn의 rt를 확인해 다음 hop(destinationdl tgw)을 찾는다. tgw att eni는 트래픽을 전달받아 tgw로 트래픽을 전달한다(이 때 tgw att eni는 tgw sbn rt를 확인하지 않으며 무조건 다음 홉을 tgw로 바라본다).
+2. tgw: spoke-1 vpc의 tgw att rt를 확인해 다음 홉 tgw att을 찾아 해당 tgw att eni로 트래픽을 라우팅한다.
+3. spoke-2 vpc / tgw sbn: tgw로부터 받은 트래픽을 tgw att eni는 tgw sbn rt를 참고해 instance-2 eni로 트래픽을 전달한다.
+4. spoke-2 vpc / svr sbn: instance-2 eni는 트래픽을 전달받고 응답 트래픽을 전달한다. svr sbn의 rt를 확인해 다음 hop(destinationdl tgw)을 찾는다.  tgw att eni는 트래픽을 전달받아 tgw로 트래픽을 전달한다(이 때 tgw att eni는 tgw sbn rt를 확인하지 않으며 무조건 다음 홉을 tgw로 바라본다).
+5. tgw: spoke-2 vpc의 tgw att rt를 확인해 다음 홉 tgw att을 찾아 해당 tgw att eni로 트래픽을 라우팅한다.
+6. spoke-1 vpc / tgw sbn: tgw로부터 받은 트래픽을 tgw att eni는 tgw sbn rt를 참고해 instance-1 eni로 트래픽을 전달한다.
+
+실제 vpc, tgw flow log는 다음과 같다.
+``` sh
+# PG-VPC(ec2 out(SYN))
+231805093461 ap-northeast-2 apne2-az3 vpc-013b0b4486425fd0a subnet-0658fffb8ed127d07 i-0856a4b5105174ab7 eni-08326128f74a7d44b 1713372621 1713372652 6 egress 1 172.30.28.147 157.119.32.149 172.30.28.147 157.119.32.149 - - 9316 443 2 120 ACCEPT 2 OK
+# PG-VPC(tgwatt in(SYN))
+886200405623 ap-northeast-2 apne2-az3 vpc-013b0b4486425fd0a subnet-0de5f8859f49abc49 - eni-094e13ec4ddfda270 1713372596 1713372626 6 ingress - 172.30.28.147 172.30.0.221 172.30.28.147 157.119.32.149 - - 9316 443 2 120 ACCEPT 2 OK
+# PG-VPC(tgwatt out(SYN))
+1713372600 1713372659 886200405623 ap-northeast-2 tgw-06003b9fdd132262e tgw-attach-03e8031df3b19fd46 egress tgw-attach-0ab4e132ce6b4f35e 6 IPv4 172.30.28.147 9316 157.119.32.149 443 apne2-az3 apne2-az3 886200405623 886200405623 vpc-013b0b4486425fd0a vpc-062f8dc77de6c6c92 subnet-0de5f8859f49abc49 subnet-08d2e606c177dae52 eni-094e13ec4ddfda270 eni-028c972ffb8c5c9da - - 2 120 0 0 0 0 2 OK
+# NET-VPC(tgwatt in(SYN))
+1713372600 1713372659 886200405623 ap-northeast-2 tgw-06003b9fdd132262e tgw-attach-0ab4e132ce6b4f35e ingress tgw-attach-03e8031df3b19fd46 6 IPv4 172.30.28.147 9316 157.119.32.149 443 apne2-az3 apne2-az3 886200405623 886200405623 vpc-013b0b4486425fd0a vpc-062f8dc77de6c6c92 subnet-0de5f8859f49abc49 subnet-08d2e606c177dae52 eni-094e13ec4ddfda270 eni-028c972ffb8c5c9da - - 2 120 0 0 0 0 2 OK
+# NET-VPC(tgwatt out(SYN))
+886200405623 ap-northeast-2 apne2-az3 vpc-062f8dc77de6c6c92 subnet-08d2e606c177dae52 - eni-028c972ffb8c5c9da 1713372612 1713372642 6 egress 1 172.31.9.247 157.119.32.149 172.30.28.147 157.119.32.149 - - 9316 443 2 120 ACCEPT 2 OK
+# NET-VPC(nat in(SYN))
+886200405623 ap-northeast-2 apne2-az3 vpc-062f8dc77de6c6c92 subnet-0c810e3b2cf788408 - eni-03daf08bc80321292 1713372648 1713372679 6 ingress - 172.30.28.147 172.31.9.36 172.30.28.147 157.119.32.149 - - 9316 443 2 120 ACCEPT 2 OK
+```
+
 transit gateway는 default route table을 갖는다. 이 route table이 default association, propagation route table이다. default association route table은 attachment를 생성하면 자동으로 연결되는 route table을 의미하며, default propagation route table은 attachment를 생성하면 자동으로 propagation이 추가되는 route table을 의미한다(propagation이 생성됨에 따라 dynamic route가 생성). 만약 transit gateway에 `Default route table association`, `Default route table propagation` 기능을 비활성화하면 aws는 default route table을 생성하지 않는다.
 
 transit gateway route table에 blackhole route를 생성할 수 있다.
