@@ -10,7 +10,7 @@ route 53 resolver는 아래 DNS 쿼리에 대해 응답한다.
 - private hosted zone의 record
 - public 도메인. route 53 resolver는 이를 위해 internet을 사용해 public record에 대해 recursive lookup을 수행한다.
 
-vpc와 on-premise 리소스를 모두 사용할 경우(VPN 또는 DX를 사용한 hybrid cloud 환경) resvoler endpoint와 forwarding rule을 사용할 수 있다.
+vpc와 on-premise 리소스를 모두 사용할 경우(VPN 또는 DX를 사용한 hybrid cloud 환경) resvoler endpoint와 (옵션)forwarding rule을 사용할 수 있다.
 - inbound resolver endpoint를 사용해 on-premise -> vpc DNS 쿼리를 할 수 있다.
 - outbound resolver endpoint를 사용해 vpc -> on-premise DNS 쿼리를 할 수 있다.
 - resolver rule을 사용해 각 도메인에 대해 forwarding rule을 만들 수 있다.
