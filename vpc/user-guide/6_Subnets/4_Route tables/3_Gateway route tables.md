@@ -1,0 +1,1 @@
+subnet이 아닌 igw, vgw에 route table을 할당할 수 있다. gateway에 할당되는 route table을 gateway route table이라고 부른다. gateway route table은 vpc로 들어오는 트래픽을 세밀하게 제어하기 위해 사용한다.

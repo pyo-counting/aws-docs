@@ -1,0 +1,6 @@
+- main route table: vpc 내 기본적으로 제공되는 라우트 테이블. subnet에 대해 명시적으로 route table을 연결하지 않으면 main route table이 연결된다.
+- local route: vpc 내에서의 통신을 위한 기본 route. 모든 route table은 기본적으로 갖는 route
+- subnet route table: subnet에 할당된 route table
+- gateway route table: internet gateway, virtual private gateway에 할당된 route table
+- edge association: vpc로 들어오는 트래픽을 appliance로 라우팅하기 위해 igw, vgw에 route table을 association할 수 있다.
+- transit gateway route table: transit gateway에 할당된 route table
