@@ -20,8 +20,8 @@ vpc처럼 resolver도 regional하다.
 
 forwarding을 하기 위해 resolver의 inbound / outbound endpoint를 생성해야한다. endpoint 생성 시 ip 주소를 할당할 수 있으며 각 ip 주소에 대해 vpc elastic network interface가 생성된다.
 
-아래 그림은 사용자 네트워크 -> route 53 resolver endpoint DNS 쿼리 예시다.
+아래 그림은 사용자 네트워크 -> route 53 resolver endpoint DNS 쿼리 예시다.  
 ![](https://docs.aws.amazon.com/images/Route53/latest/DeveloperGuide/images/Resolver-inbound-endpoint.png)
 
-아래 그림은 ec2 -> 사용자 네트워크 DNS 쿼리 예시다.
+아래 그림은 ec2 -> 사용자 네트워크 DNS 쿼리 예시다.  
 ![](https://docs.aws.amazon.com/images/Route53/latest/DeveloperGuide/images/Resolver-outbound-endpoint.png)

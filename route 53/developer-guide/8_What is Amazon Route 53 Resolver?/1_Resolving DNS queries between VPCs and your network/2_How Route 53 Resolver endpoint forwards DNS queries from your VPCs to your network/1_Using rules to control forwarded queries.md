@@ -1,5 +1,5 @@
 rule은 route 53 resolver endpoint가 사용자 네트워크의 DNS resolver로 전달할 DNS 쿼리와 route 53 resolver가 직접 응답할 쿼리를 제어한다.
-rule은 route 53 resolver endpoint(inbound / outbound)가 DNS 쿼리에 대해 사용자 네트워크로 또는 자신이 응답할지에 대한 규칙을 정의한다.
+rule은 route 53 resolver endpoint(outbound)가 DNS 쿼리에 대해 사용자 네트워크로 또는 자신이 응답할지에 대한 규칙을 정의한다.
 
 rule을 분류하는 여러가지 방법이 있다. 첫 번째는 누가 만들었는지
 - Autodefined rules: resolver는 미리 정의된 rule을 자동으로 생성하고 vpc에 연결한다. 대부분은 resolver가 쿼리에 대한 응답을 위해 aws 할당 domain에 적용된다.

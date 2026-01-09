@@ -20,11 +20,10 @@ vpc와 on-premise 리소스를 모두 사용할 경우(VPN 또는 DX를 사용�
 ![](https://docs.aws.amazon.com/images/Route53/latest/DeveloperGuide/images/Resolver-routing.png)
 
 **Outbound (solid arrows 1–5)**
-1. An Amazon EC2 instance needs to resolve a DNS query to the domain internal.example.com. The authoritative DNS server is in the on-premises data center. This DNS query is sent to the VPC+2 in the VPC that connects to Route 53 Resolver.
-2. A Route 53 Resolver forwarding rule is configured to forward queries to internal.example.com in the on-premises data center.
-3. The query is forwarded to an outbound endpoint.
-4. The outbound endpoint forwards the query to the on-premises DNS resolver through a private connection between AWS and the data center. The connection can be either AWS Direct Connect or AWS Site-to-Site VPN, depicted as a virtual private gateway.
-5. The on-premises DNS resolver resolves the DNS query for internal.example.com and returns the answer to the Amazon EC2 instance via the same path in reverse.
+1. EC2 인스턴스가 `internal.example.com` 도메인에 대한 DNS query를 수행한다. 해당 도메인에 대한 authoritative DNS server는 on-premise data center에 위치한다. EC2 인스턴스는 DNS query를 VPC cidr + 2 주소로 질의한다. 해당 주소는 route 53 resolver에 연결된 주소다.
+2. route 53 resolver의 forwarding rule은 `internal.example.com`에 대한 쿼리를 on-premise data center로 포워딩되도록 설정되어 있다.
+3. 쿼리는 outbound endpoint로 향한다.
+4. on-premise DNS resolver의 DNS 쿼리 결과는 동일한 네트워크 경로로 반환한다.
 
 **Inbound (dashed arrows a–d)**
 1. A client in the on-premises data center needs to resolve a DNS query to an AWS resource for the domain dev.example.com. It sends the query to the on-premises DNS resolver.
