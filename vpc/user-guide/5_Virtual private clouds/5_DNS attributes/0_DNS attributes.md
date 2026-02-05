@@ -1,0 +1,1 @@
+aws는 vpc를 위한 DNS server(Amazon Route 53 Resolver)를 제공한다. 사용자의 DNS server 사용을 위해서는 DHCP option set을 새로 생성 및 vpc에 할당해야 한다.
