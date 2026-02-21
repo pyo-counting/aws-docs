@@ -14,6 +14,8 @@ inbound endpoint는 두 가지 유형이 있다. IP 주소로 전달하는 'defa
 **Outbound endpoint: Resolver conditionally forwards queries to resolvers on your network via this endpoint**  
 DNS query를 사용자 DNS resolver로 forwarding하기 위해 resolver rule을 만든다. resolver rule은 forwarding 대상 domain 이름과 사용자 DNS resolver의 ip주소를 포함한다. DNS query가 여러 rule에 매칭되는 경우 resolver는 더 정확하게 매칭되는 rule을 선택하고 해당 rule에 명시된 사용자 DNS resolver ip로 DNS query를 forwarding한다.
 
+resolver rule은 생성 시, outbound endpoint를 선택해야 한다.
+
 vpc처럼 resolver도 regional하다.
 
 소유하지 않은 vpc에 resolver endpoint를 생성할 수 없다. vpc owner만 생성이 가능하다.
