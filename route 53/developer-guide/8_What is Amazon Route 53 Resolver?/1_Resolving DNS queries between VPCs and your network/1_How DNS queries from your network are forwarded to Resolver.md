@@ -14,8 +14,8 @@ Steps for creating delegation inbound endpoints
 
 Here's how Resolver resolves DNS queries that originate on your network via a delegation inbound endpoint:
 1. on-premises에서 private hosted zone으로 subdomain을 위임해야 한다. inbound delegation endpoint를 통해 subdomain을 위임하는 것이므로, 위임되는 subdomain의 glue record 값에 inbound endpoint의 IP 주소를 사용한다.  
-    **Note**:  
-    DNS 쿼리가 resolving 가능하기 위해서 glue record를 등록이 필요할 수도 있다. 부모 domain과 동일한 zone 내에 있는 name server로 subdomain을 위임했을 경우 glue record가 필요하다.
+    > **Note**:  
+    > DNS 쿼리가 resolving 가능하기 위해서 glue record를 등록이 필요할 수도 있다. 부모 domain과 동일한 zone 내에 있는 name server로 subdomain을 위임했을 경우 glue record가 필요하다.
 2. A web browser or another application on your network submits a DNS query for a domain name that you delegated to the Route 53 Resolver.
 3. A resolver on your network forwards the query to the IP addresses in your inbound endpoint.
 4. The inbound endpoint delegates the query to Resolver.
