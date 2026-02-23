@@ -11,12 +11,12 @@ autodefined rule을 재정의(override)하려면, 동일한 도메인 이름에 
 
 VPC Resolver는 아래 autodefined rule을 생성한다.
 
-Rules for private hosted zones  
+**Rules for private hosted zones**  
 VPC에 연결하는 각 private hosted zone에 대해 VPC Resolver는 rule을 생성하고 이를 해당 VPC에 연결한다. private hosted zone을 여러 VPC에 연결하면 VPC Resolver는 동일 규칙을 동일한 VPC들에 연결한다.
 
 이 rule의 유형은 Forward다.
 
-Rules for various AWS internal domain names  
+**Rules for various AWS internal domain names**  
 이 섹션의 내부 도메인 이름에 대한 모든 rule 유형은 Forward다. VPC Resolver는 이러한 도메인 이름에 대한 DNS 쿼리를 해당 VPC의 authoritative name servers로 전달한다.
 
 > **Note**:  
@@ -54,5 +54,5 @@ tgw 또는 VPC perring을 통해 VPC를 다른 VPC와 연결하고 DNS support�
     - `ec2.internal`: us-east-1 region만 이 도메인 이름을 사용한다.
     - `compute-1.amazonaws.com`: us-east-1 region만 이 도메인 이름을 사용한다.
 
-A rule for all other domains
+**A rule for all other domains**  
 VPC Resolver는 모든 도메인 이름에 적용되는 .(점) rule을 생성한다. 이 . 규칙은 Recursive 타입을 가지며, 이는 해당 rule이 VPC Resolver를 recursive resolver 작동하게 만든다는 것을 의미한다. 해당 rule은 AWS console을 통해 확인 가능하다.
